@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# This script starts up services that we expect to be in the environment:
+#   1) A Postgres instance running in a Docker container.
+#   2) Run dbt to seed and populate said Postgres instance with data.
+
+set -euo pipefail
+
+GIT_DIR=`git rev-parse --show-toplevel`
+LOCALENV_COMPOSE=${GIT_DIR}/ops/localenv/localenv.yaml
+DBT_INIT_SCRIPT=${GIT_DIR}/ops/localenv/init/dbt/00_entrypoint.sh
+
+echo "Starting Docker"
+docker-compose -f ${LOCALENV_COMPOSE} up -d
+
+echo "Starting dbt init"
+bash ${DBT_INIT_SCRIPT}
