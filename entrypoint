@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+# Assumes that the environment you are running in has Python & Pip configured.
+# Tip: Run as sudo!
+
+#######################################
+# Constructs the various components for the local environment.
+#######################################
+function _localenv() {
+    # Configure the Python environment.
+    # Will create a directory called `.env`
+    virtualenv .env
+    source .env/bin/activate
+    pip install -r requirements.txt
+
+    # Then configure the resoruces in the localenv.
+    bash scripts/localenv
+
+    # Then start the app.
+    bash scripts/run_server
+}
+
+#######################################
+# Tears down the various components for the local environment.
+#######################################
+function _localenv_down() {
+    echo "Tearing down localenv."
+    bash scripts/localenv_down
+}
+
+#######################################
+# Controls build up and tear down.
+#######################################
+function main() {
+    trap _localenv_down SIGINT
+    _localenv
+}
+
+main "$@"

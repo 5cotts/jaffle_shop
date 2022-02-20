@@ -4,35 +4,27 @@
 This [dbt](https://www.getdbt.com/) project is for demonstrations and tutorials.
 
 ### Running this project
+This project is a fork of https://github.com/emilieschario/jaffle_shop. 
+
+This fork differs because it seeds the data into a Postgres database before using `dbt.`
+
+Please note, this installation process assumes that you have Docker, Python and Pip configured on the machine that you are running this on.
+
 To play with the project yourself:
-1. Install dbt using [these instructions](https://dbt.readme.io/docs/installation).
-2. Clone this repository using:
+1. Clone this repository using:
 ```bash
-$ git clone git@github.com:clrcrl/jaffle_shop.git
+$ git clone git@github.com:5cotts/jaffle_shop.git
 ```
 If you need extra help, see [these instructions](https://docs.getdbt.com/docs/use-an-existing-project).
 
-3. Set up a profile called `jaffle_shop` using [these instructions](https://docs.getdbt.com/docs/configure-your-profile). You can run this in a new schema in your existing data warehouse, or even setup a local postgres database to run this.
-
-4. Change into the `jaffle_shop` directory from the command line:
+2. Change into the `jaffle_shop` directory from the command line:
 ```bash
 $ cd jaffle_shop
 ```
-5. Load the CSVs with the demo data set. This materializes the CSVs as tables in your target schema.
+
+3. Run the following from your command line. We suggest running as `sudo` as this command will trigger certain Docker command which require root access.
 ```bash
-$ dbt seed
-```
-6. Run the models:
-```bash
-$ dbt run
-```
-7. Generate documentation for the project:
-```bash
-$ dbt docs generate
-```
-8. View the documentation for the project:
-```bash
-$ dbt docs serve
+$ sudo bash ./entrypoint
 ```
 
 ### What is a jaffle?
