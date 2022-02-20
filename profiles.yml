@@ -1,0 +1,14 @@
+jaffle_shop:
+  outputs:
+
+    local:
+      type: postgres
+      threads: 4
+      host: 127.0.0.1
+      port: 5432
+      user: main
+      pass: main
+      dbname: prime
+      schema: public
+
+  target: local

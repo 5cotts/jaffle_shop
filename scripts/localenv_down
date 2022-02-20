@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# This script tears down services that we expect to be in the environment
+
+set -euo pipefail
+
+GIT_DIR=`git rev-parse --show-toplevel`
+LOCALENV_COMPOSE=${GIT_DIR}/ops/localenv/localenv.yaml
+
+docker-compose -f ${LOCALENV_COMPOSE} down

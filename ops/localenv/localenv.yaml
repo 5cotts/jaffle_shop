@@ -1,0 +1,18 @@
+services:
+    postgres:
+        environment:
+        # Mount data hereonment:
+            PGDATA: /var/lib/postgresql/data/gdata
+            POSTGRES_PASSWORD: superuser_password
+        image: postgres:13
+        ports:
+        - 127.0.0.1:5432:5432
+        restart: always
+        volumes:
+        # Mount data here. should be parallel to the environment variable above
+        - ./localdata/postgres/:/var/lib/postgresql/data
+        # Mount initialization scripts here.
+        # The format is https://github.com/docker-library/postgres/issues/313
+        - ./init/postgres/:/docker-entrypoint-initdb.d/
+
+version: '3.3'
